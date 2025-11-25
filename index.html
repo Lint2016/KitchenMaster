@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Elevate Catering | Gourmet Event Catering Excellence</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="Elevate Catering crafts gourmet experiences for weddings, corporate events, and private dinners with custom menus and award-winning service." />
+  <link rel="canonical" href="https://www.example.com/" />
+  <meta name="theme-color" content="#111111" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Elevate Catering | Gourmet Event Catering Excellence" />
+  <meta property="og:description"
+    content="Premium gourmet catering, custom menus, and award-winning service for unforgettable events." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.example.com/" />
+  <meta property="og:image" content="https://www.example.com/og-image.jpg" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="site-header site-header--sticky">
+    <div class="container-custom site-header__inner">
+      <a href="/" class="site-header__brand">
+        <span class="site-header__brand-mark">EC</span>
+        <span class="site-header__brand-text">Elevate Catering</span>
+      </a>
+      <nav class="site-header__nav" aria-label="Primary navigation">
+        <button class="site-header__nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+          <span class="site-header__nav-toggle-bar"></span>
+          <span class="site-header__nav-toggle-bar"></span>
+          <span class="site-header__nav-toggle-bar"></span>
+          <span class="visually-hidden">Toggle navigation</span>
+        </button>
+        <ul class="site-header__nav-list" id="primary-nav">
+          <li class="site-header__nav-item">
+            <a href="/" data-nav-link="home" class="site-header__nav-link">Home</a>
+          </li>
+          <li class="site-header__nav-item">
+            <a href="/#about" data-scroll-target="#about" class="site-header__nav-link">About</a>
+          </li>
+          <li class="site-header__nav-item">
+            <a href="/#services" data-scroll-target="#services" class="site-header__nav-link">Services</a>
+          </li>
+          <li class="site-header__nav-item">
+            <a href="/#menu" data-scroll-target="#menu" class="site-header__nav-link">Menu</a>
+          </li>
+          <li class="site-header__nav-item">
+            <a href="/#gallery" data-scroll-target="#gallery" class="site-header__nav-link">Gallery</a>
+          </li>
+          <li class="site-header__nav-item">
+            <a href="/#testimonials" data-scroll-target="#testimonials" class="site-header__nav-link">
+              Testimonials
+            </a>
+          </li>
+          <li class="site-header__nav-item">
+            <a href="/#faq" data-scroll-target="#faq" class="site-header__nav-link">FAQ</a>
+          </li>
+          <li class="site-header__nav-item">
+            <a href="/#contact" data-scroll-target="#contact" class="site-header__nav-link">Contact</a>
+          </li>
+          <li class="site-header__nav-item">
+            <a href="/blog" data-nav-link="blog" class="site-header__nav-link">Blog</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app" class="site-main" data-route="/">
+    <!-- HOME PAGE WRAPPER -->
+    <div id="home-page" class="page page--home" data-page="home">
+      <!-- Hero Section -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero__media">
+          <img src="assets/pexels-marianna-15577-3843225.jpg"
+            alt="Elegant gourmet catering setup with candlelit tables and plated dishes" class="hero__image"
+            data-ai-prompt="Ultra-realistic photo of a luxury gourmet catering event with candlelit tables, gold cutlery, and plated fine-dining dishes in a warm atmosphere" />
+          <div class="hero__overlay"></div>
+        </div>
+        <div class="container-custom hero__content-wrapper">
+          <div class="hero__content">
+            <h1 id="hero-heading" class="hero__title u-gradient-text">
+              Elevate Your Event with Gourmet Excellence
+            </h1>
+            <p class="hero__subtitle">
+              For over 15 years, Elevate Catering has crafted immersive culinary experiences for weddings, corporate
+              galas, and private celebrations—where every detail is plated to perfection.
+            </p>
+            <div class="hero__actions">
+              <a href="/#contact" class="button button--primary hero__cta" data-scroll-target="#contact">
+                Request a Quote
+              </a>
+              <a href="/#services" class="button button--outline hero__cta" data-scroll-target="#services">
+                Explore Services
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="section section-about section-padding" aria-labelledby="about-heading">
+        <div class="container-custom section-about__grid">
+          <div class="section-about__media">
+            <video class="section-about__video shadow-elegant" autoplay muted loop playsinline
+              poster="assets/aboutP.jpg">
+              <source src="assets/chef-video.mp4" type="video/mp4">
+              <!-- Fallback image for browsers that don't support video -->
+              <img src="assets/aboutP.jpg" alt="Chef team plating artistic gourmet dishes in an open kitchen"
+                class="section-about__image shadow-elegant" />
+            </video>
+          </div>
+          <div class="section-about__content">
+            <h2 id="about-heading" class="section-about__title u-gradient-text">
+              Crafting Culinary Memories
+            </h2>
+            <p class="section-about__text">
+              For more than 15 years, Elevate Catering has helped hosts transform gatherings into unforgettable
+              experiences. From intimate chef's table dinners to large-scale corporate galas, our culinary team blends
+              refined technique, seasonal ingredients, and flawless service.
+            </p>
+            <p class="section-about__text">
+              We collaborate closely with you to design menus that reflect your story, your guests, and your vision—
+              whether that's modern tasting menus, global comfort classics, or plant-forward feasts.
+            </p>
+            <a href="/#contact" data-scroll-target="#contact" class="button button--ghost section-about__cta">
+              Plan Your Event
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Statistics Section -->
+      <section id="statistics" class="section section-statistics" aria-labelledby="statistics-heading">
+        <div class="container-custom">
+          <h2 id="statistics-heading" class="visually-hidden">Our Track Record</h2>
+          <div class="statistics-grid">
+            <div class="stat-item" data-stat-target="15">
+              <div class="stat-item__value" data-suffix="+">0</div>
+              <div class="stat-item__label">Years of Excellence</div>
+            </div>
+            <div class="stat-item" data-stat-target="500">
+              <div class="stat-item__value" data-suffix="+">0</div>
+              <div class="stat-item__label">Events Catered</div>
+            </div>
+            <div class="stat-item" data-stat-target="10000">
+              <div class="stat-item__value" data-suffix="+">0</div>
+              <div class="stat-item__label">Satisfied Guests</div>
+            </div>
+            <div class="stat-item" data-stat-target="4.9">
+              <div class="stat-item__value" data-suffix="/5" data-decimals="1">0</div>
+              <div class="stat-item__label">Average Rating</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services" class="section section-services section-padding" aria-labelledby="services-heading">
+        <div class="container-custom">
+          <header class="section__header">
+            <h2 id="services-heading" class="section__title">Services Tailored to Every Occasion</h2>
+            <p class="section__subtitle">
+              From first toast to final course, we orchestrate every detail of your culinary experience.
+            </p>
+          </header>
+
+          <div class="section-services__grid" aria-label="Key catering services">
+            <!-- Service Card 1 -->
+            <article class="services-card shadow-soft u-hover-lift">
+              <div class="services-card__icon" aria-hidden="true">
+                <!-- ChefHat icon (simple SVG) -->
+                <svg viewBox="0 0 24 24" class="icon icon--chef-hat" aria-hidden="true" focusable="false">
+                  <path d="M7 10v8h10v-8M5 10h14M8 18v2h8v-2M8 6a3 3 0 0 1 5.2-2A3 3 0 0 1 19 7a2.5 2.5 0 0 1-2 2.45"
+                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3 class="services-card__title">Custom Menus</h3>
+              <p class="services-card__text">
+                Collaborate with our culinary team to create bespoke menus that reflect your taste, heritage, and
+                event story.
+              </p>
+            </article>
+
+            <!-- Service Card 2 -->
+            <article class="services-card shadow-soft u-hover-lift">
+              <div class="services-card__icon" aria-hidden="true">
+                <!-- Users icon -->
+                <svg viewBox="0 0 24 24" class="icon icon--users" aria-hidden="true" focusable="false">
+                  <path
+                    d="M16 21v-1a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v1M18 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM10 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM21 21v-1a3 3 0 0 0-2-2.82"
+                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3 class="services-card__title">Event Catering</h3>
+              <p class="services-card__text">
+                Seamless service for weddings, corporate events, galas, and private celebrations of any size.
+              </p>
+            </article>
+
+            <!-- Service Card 3 -->
+            <article class="services-card shadow-soft u-hover-lift">
+              <div class="services-card__icon" aria-hidden="true">
+                <!-- Sparkles icon -->
+                <svg viewBox="0 0 24 24" class="icon icon--sparkles" aria-hidden="true" focusable="false">
+                  <path
+                    d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3zm7 9l1.2 2.8L23 16l-2.8 1.2L19 20l-1.2-2.8L15 16l2.8-1.2L19 12zm-14 1l1 2.4L9 16l-2.4 1L6 19.4 5 17 2.6 16 5 14.4 5 13z"
+                    fill="currentColor" />
+                </svg>
+              </div>
+              <h3 class="services-card__title">Premium Quality</h3>
+              <p class="services-card__text">
+                Seasonal, responsibly sourced ingredients prepared with precision and plated with artful detail.
+              </p>
+            </article>
+
+            <!-- Service Card 4 -->
+            <article class="services-card shadow-soft u-hover-lift">
+              <div class="services-card__icon" aria-hidden="true">
+                <!-- Award icon -->
+                <svg viewBox="0 0 24 24" class="icon icon--award" aria-hidden="true" focusable="false">
+                  <path
+                    d="M12 3l2.09 4.24L19 8.27l-3.5 3.41.83 4.86L12 14.77l-4.33 1.77.83-4.86L5 8.27l4.91-1.03L12 3zM9 21l3-2 3 2v-3l-3-2-3 2v3z"
+                    fill="currentColor" />
+                </svg>
+              </div>
+              <h3 class="services-card__title">Award Winning</h3>
+              <p class="services-card__text">
+                Recognized by leading culinary publications and beloved by clients for service that anticipates every
+                need.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Menu Packages Section -->
+      <section id="menu" class="section section-menu section-padding" aria-labelledby="menu-heading">
+        <div class="container-custom">
+          <header class="section__header">
+            <h2 id="menu-heading" class="section__title">Curated Menu Packages</h2>
+            <p class="section__subtitle">
+              Three tiers to match your vision and guest list—each fully customizable with our culinary team.
+            </p>
+          </header>
+
+          <div class="menu-packages" aria-label="Menu packages pricing tiers">
+            <!-- Packages will be injected from JS using template -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery Section -->
+      <section id="gallery" class="section section-gallery section-padding" aria-labelledby="gallery-heading">
+        <div class="container-custom">
+          <header class="section__header">
+            <h2 id="gallery-heading" class="section__title">Gallery of Gourmet Moments</h2>
+            <p class="section__subtitle">
+              A taste of the experiences we've created—from candlelit dinners to grand ballroom celebrations.
+            </p>
+          </header>
+
+          <div class="gallery-grid" aria-label="Food and event gallery">
+            <!-- Gallery items will be injected from JS using template -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section id="testimonials" class="section section-testimonials section-padding"
+        aria-labelledby="testimonials-heading">
+        <div class="container-custom">
+          <header class="section__header section__header--center">
+            <h2 id="testimonials-heading" class="section__title">Loved by Our Clients</h2>
+            <p class="section__subtitle">
+              Hear from hosts who trusted us with their most meaningful moments.
+            </p>
+          </header>
+
+          <div class="testimonials-carousel" aria-roledescription="carousel">
+            <div class="testimonials-carousel__track" role="list">
+              <!-- Slides injected via JS -->
+            </div>
+            <div class="testimonials-carousel__controls">
+              <button class="button button--ghost testimonials-carousel__control testimonials-carousel__control--prev"
+                type="button" aria-label="Previous testimonial">
+                ‹
+              </button>
+              <button class="button button--ghost testimonials-carousel__control testimonials-carousel__control--next"
+                type="button" aria-label="Next testimonial">
+                ›
+              </button>
+            </div>
+            <div class="testimonials-carousel__dots" role="tablist" aria-label="Select testimonial">
+              <!-- Dots injected via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="section section-faq section-padding" aria-labelledby="faq-heading">
+        <div class="container-custom">
+          <header class="section__header section__header--center">
+            <h2 id="faq-heading" class="section__title">Frequently Asked Questions</h2>
+            <p class="section__subtitle">
+              Details to help you plan with confidence. Still curious? We're a message away.
+            </p>
+          </header>
+
+          <div class="accordion" aria-label="Catering questions and answers">
+            <!-- FAQ items injected from JS using template -->
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <form class="contact-form"  id="contact">
+    <div class="contact-form__field">
+      <label for="email" class="contact-form__label">Email</label>
+      <input type="email" id="email" name="email" class="contact-form__input" required autocomplete="email" />
+      <p class="contact-form__error" data-error-for="email"></p>
+    </div>
+
+    <div class="contact-form__field">
+      <label for="phone" class="contact-form__label">Phone</label>
+      <input type="tel" id="phone" name="phone" class="contact-form__input" autocomplete="tel" />
+      <p class="contact-form__error" data-error-for="phone"></p>
+    </div>
+
+    <div class="contact-form__field contact-form__field--inline">
+      <div class="contact-form__field">
+        <label for="event-date" class="contact-form__label">Event Date</label>
+        <input type="date" id="event-date" name="eventDate" class="contact-form__input" />
+        <p class="contact-form__error" data-error-for="eventDate"></p>
+      </div>
+      <div class="contact-form__field">
+        <label for="guest-count" class="contact-form__label">Guest Count</label>
+        <input type="number" id="guest-count" name="guestCount" class="contact-form__input" min="1" step="1" />
+        <p class="contact-form__error" data-error-for="guestCount"></p>
+      </div>
+    </div>
+
+    <div class="contact-form__field">
+      <label for="message" class="contact-form__label">Event Details</label>
+      <textarea id="message" name="message" class="contact-form__input contact-form__input--textarea" rows="5"
+        required></textarea>
+      <p class="contact-form__error" data-error-for="message"></p>
+    </div>
+
+    <button type="submit" class="button button--primary contact-form__submit">
+      Submit Inquiry
+    </button>
+    <p class="contact-form__success" id="contact-success" role="status" aria-live="polite"></p>
+    </form>
+    </div>
+
+    <aside class="section-contact__map" aria-label="Location map">
+      <div class="map-embed shadow-soft">
+        <!-- Google Maps embed for 271 Columbine Ave, Mondeor, Johannesburg South -->
+        <iframe title="Elevate Catering Location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.5353754287253!2d28.007669475417625!3d-26.276738877031917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9508b12f5acb5b%3A0x9141162c9c9c4c71!2s271%20Columbine%20Ave%2C%20Mondeor%2C%20Johannesburg%20South%2C%202091!5e0!3m2!1sen!2sza!4v1763123730006!5m2!1sen!2sza"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border:0;" allowfullscreen="yes"></iframe>
+      </div>
+
+      <div class="section-contact__details">
+        <p class="section-contact__detail"><strong>Address:</strong> 271 columbine Avenue</p>
+        <p class="section-contact__detail"><strong>Wahstapp:</strong> 123456</p>
+      </div>
+    </aside>
+    </div>
+    </section>
+    </div>
+
+    <!-- BLOG PAGE WRAPPER -->
+    <div id="blog-page" class="page page--blog" data-page="blog" hidden>
+      <section class="section section-blog section-padding" aria-labelledby="blog-heading">
+        <div class="container-custom">
+          <header class="section__header section__header--center">
+            <h1 id="blog-heading" class="section__title">Gourmet Insights &amp; Event Inspiration</h1>
+            <p class="section__subtitle">
+              Ideas, checklists, and chef tips to help you design unforgettable gatherings.
+            </p>
+          </header>
+
+          <div class="blog-filters" aria-label="Filter blog posts by category">
+            <button class="button button--chip blog-filters__chip blog-filters__chip--active" type="button"
+              data-category="all">
+              All
+            </button>
+            <button class="button button--chip" type="button" data-category="Event Planning">
+              Event Planning
+            </button>
+            <button class="button button--chip" type="button" data-category="Catering Tips">
+              Catering Tips
+            </button>
+            <button class="button button--chip" type="button" data-category="Recipes">
+              Recipes
+            </button>
+            <button class="button button--chip" type="button" data-category="Seasonal">
+              Seasonal
+            </button>
+          </div>
+
+          <div class="blog-grid" aria-label="Blog articles">
+            <!-- Blog cards injected via JS using template -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Blog Detail -->
+      <section class="section section-blog-detail section-padding" aria-labelledby="blog-detail-heading" hidden>
+        <div class="container-custom blog-detail">
+          <button class="button button--ghost blog-detail__back" type="button" data-blog-back>
+            ← Back to Articles
+          </button>
+          <article class="blog-detail__content">
+            <header class="blog-detail__header">
+              <p class="blog-detail__category"></p>
+              <h1 id="blog-detail-heading" class="blog-detail__title"></h1>
+              <p class="blog-detail__meta"></p>
+            </header>
+            <figure class="blog-detail__figure">
+              <img src="" alt="" class="blog-detail__image" />
+              <figcaption class="blog-detail__figure-caption"></figcaption>
+            </figure>
+            <div class="blog-detail__body">
+              <!-- Body injected as safe HTML from structured content -->
+            </div>
+          </article>
+
+          <aside class="blog-related" aria-label="Related articles">
+            <h2 class="blog-related__title">Related Articles</h2>
+            <div class="blog-related__list">
+              <!-- Related posts injected via JS -->
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer section-padding">
+    <div class="container-custom site-footer__grid">
+      <div class="site-footer__brand">
+        <span class="site-footer__brand-mark">EC</span>
+        <p class="site-footer__text">
+          Elevate Catering crafts gourmet experiences that honor your story and delight every guest.
+        </p>
+      </div>
+      <div class="site-footer__meta">
+        <p class="site-footer__copy">© <span id="year"></span> Elevate Catering. All rights reserved.</p>
+        <p class="site-footer__attribution">
+          Imagery generated with AI based on custom prompts. Replace with your brand photography for production use.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Templates -->
+
+  <!-- Menu Package Template -->
+  <template id="template-menu-package">
+    <article class="menu-packages__tier shadow-soft u-hover-lift">
+      <header class="menu-packages__header">
+        <h3 class="menu-packages__name"></h3>
+        <p class="menu-packages__price"></p>
+      </header>
+      <ul class="menu-packages__features"></ul>
+      <button class="button button--secondary menu-packages__button" type="button">
+        Choose Package
+      </button>
+    </article>
+  </template>
+
+  <!-- Gallery Item Template -->
+  <template id="template-gallery-item">
+    <figure class="gallery-grid__item shadow-soft u-hover-lift">
+      <img class="gallery-grid__image" src="" alt="" />
+      <figcaption class="gallery-grid__caption"></figcaption>
+    </figure>
+  </template>
+
+  <!-- Testimonial Slide Template -->
+  <template id="template-testimonial-slide">
+    <article class="testimonial" role="group">
+      <div class="testimonial__profile">
+        <img class="testimonial__avatar" src="" alt="" />
+        <div class="testimonial__meta">
+          <p class="testimonial__name"></p>
+          <p class="testimonial__event"></p>
+        </div>
+      </div>
+      <p class="testimonial__quote"></p>
+      <div class="testimonial__rating" aria-label="5 out of 5 stars">
+        <span class="testimonial__star">★</span>
+        <span class="testimonial__star">★</span>
+        <span class="testimonial__star">★</span>
+        <span class="testimonial__star">★</span>
+        <span class="testimonial__star">★</span>
+      </div>
+    </article>
+  </template>
+
+  <!-- FAQ Item Template -->
+  <template id="template-faq-item">
+    <article class="accordion__item">
+      <button class="accordion__header" type="button" aria-expanded="false">
+        <span class="accordion__question"></span>
+        <span class="accordion__icon" aria-hidden="true">+</span>
+      </button>
+      <div class="accordion__panel" hidden>
+        <p class="accordion__answer"></p>
+      </div>
+    </article>
+  </template>
+
+  <!-- Blog Card Template -->
+  <template id="template-blog-card">
+    <article class="blog-card shadow-soft u-hover-lift">
+      <a href="#" class="blog-card__link">
+        <figure class="blog-card__figure">
+          <img class="blog-card__image" src="" alt="" />
+        </figure>
+        <div class="blog-card__body">
+          <p class="blog-card__category"></p>
+          <h2 class="blog-card__title"></h2>
+          <p class="blog-card__excerpt"></p>
+          <p class="blog-card__meta"></p>
+        </div>
+      </a>
+    </article>
+  </template>
+
+  <!-- Related Blog Item Template -->
+  <template id="template-blog-related-item">
+    <article class="blog-related__item">
+      <a href="#" class="blog-related__link"></a>
+    </article>
+  </template>
+
+  <button class="back-to-top" type="button" aria-label="Back to top">
+    ↑ Back to top
+  </button>
+
+  <script type="module" src="index.js"></script>
+</body>
+
+</html>
