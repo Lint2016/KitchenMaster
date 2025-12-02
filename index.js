@@ -855,6 +855,127 @@ function initAvailabilityCalendar() {
   renderCalendar();
 }
 
+/* Hero Parallax Scrolling */
+
+function initHeroParallax() {
+  const hero = document.querySelector('.hero');
+  const heroImage = document.querySelector('.hero__image');
+
+  if (!hero || !heroImage) return;
+
+  // Function to update parallax based on scroll position
+  const updateParallax = () => {
+    const scrolled = window.scrollY;
+    const heroHeight = hero.offsetHeight;
+
+    // Only apply parallax while hero is in viewport
+    if (scrolled < heroHeight) {
+      // Move image slower than scroll (0.5 = half speed)
+      const yPos = scrolled * 0.5;
+      heroImage.style.transform = `translateY(${yPos}px)`;
+    }
+  };
+
+  // Use requestAnimationFrame for smooth performance
+  let ticking = false;
+  const handleScroll = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateParallax();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  updateParallax(); // Initial call
+}
+
+/* Scroll Animations */
+
+function initScrollAnimations() {
+  const elements = document.querySelectorAll('.reveal-on-scroll');
+  if (elements.length === 0) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+          // Optional: stop observing after animation (animations happen once)
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1, // Trigger when 10% of element is visible
+      rootMargin: '0px 0px -50px 0px' // Trigger slightly before element enters viewport
+    }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+}
+
+/* Gallery Lightbox */
+
+function initGalleryLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = lightbox.querySelector('.lightbox__image');
+  const lightboxCaption = lightbox.querySelector('.lightbox__caption');
+  const closeButton = lightbox.querySelector('.lightbox__close');
+
+  if (!lightbox || !lightboxImage || !closeButton) return;
+
+  // Function to open lightbox
+  const openLightbox = (src, alt, caption) => {
+    lightboxImage.src = src;
+    lightboxImage.alt = alt;
+    lightboxCaption.textContent = caption || '';
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  };
+
+  // Function to close lightbox
+  const closeLightbox = () => {
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = ''; // Restore scrolling
+    // Clear image after animation completes
+    setTimeout(() => {
+      lightboxImage.src = '';
+      lightboxImage.alt = '';
+      lightboxCaption.textContent = '';
+    }, 300);
+  };
+
+  // Attach click listeners to gallery images
+  const galleryImages = document.querySelectorAll('.gallery-grid__image');
+  galleryImages.forEach((img) => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => {
+      const caption = img.closest('.gallery-grid__item')?.querySelector('.gallery-grid__caption')?.textContent || '';
+      openLightbox(img.src, img.alt, caption);
+    });
+  });
+
+  // Close button
+  closeButton.addEventListener('click', closeLightbox);
+
+  // Click on background to close
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  // Escape key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.getAttribute('aria-hidden') === 'false') {
+      closeLightbox();
+    }
+  });
+}
+
 // Back to Top button
 
 function initBackToTop() {
@@ -890,6 +1011,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initBlogListing();
     initBackToTop();
     initStatisticsCounter();
+    initScrollAnimations();
+    initGalleryLightbox();
   } catch (err) {
     console.error('App init error:', err);
   }
