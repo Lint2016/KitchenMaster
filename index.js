@@ -316,6 +316,19 @@ function initNavigation() {
   const navToggle = selectElement('.site-header__nav-toggle');
   const navList = selectElement('.site-header__nav-list');
   const navLinks = selectAllElements('.site-header__nav-link');
+  const header = selectElement('.site-header');
+
+  // Add scroll effect to header
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    lastScroll = currentScroll;
+  }, { passive: true });
 
   navToggle.addEventListener('click', () => {
     const isOpen = navList.dataset.open === 'true';
@@ -358,11 +371,45 @@ function handleScrollLink(selector) {
     if (!target) {
       return;
     }
+    const headerHeight = 80;
     const rect = target.getBoundingClientRect();
-    const offsetY = window.scrollY + rect.top - 80; // account for header
-    window.scrollTo({ top: offsetY, behavior: 'smooth' });
+    const offsetY = window.scrollY + rect.top - headerHeight;
+    
+    // Enhanced smooth scroll with easing
+    const startPosition = window.scrollY;
+    const distance = offsetY - startPosition;
+    const duration = Math.min(800, Math.abs(distance) * 0.5); // Adaptive duration
+    let startTime = null;
+
+    function easeInOutCubic(t) {
+      return t < 0.5 
+        ? 4 * t * t * t 
+        : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function animateScroll(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const ease = easeInOutCubic(progress);
+      
+      window.scrollTo(0, startPosition + distance * ease);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    }
+
+    requestAnimationFrame(animateScroll);
   } catch (error) {
     console.error('Smooth scroll error:', error);
+    // Fallback to native smooth scroll
+    const target = document.querySelector(selector);
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      const offsetY = window.scrollY + rect.top - 80;
+      window.scrollTo({ top: offsetY, behavior: 'smooth' });
+    }
   }
 }
 
@@ -372,7 +419,7 @@ function renderMenuPackages() {
   const container = selectElement('.menu-packages');
   const template = selectElement('#template-menu-package');
 
-  MENU_PACKAGES.forEach((pkg) => {
+  MENU_PACKAGES.forEach((pkg, index) => {
     const clone = template.content.cloneNode(true);
     const tierEl = clone.querySelector('.menu-packages__tier');
     const nameEl = clone.querySelector('.menu-packages__name');
@@ -384,6 +431,10 @@ function renderMenuPackages() {
     priceEl.textContent = `${pkg.price}`;
     tierEl.setAttribute('data-package-id', pkg.id);
     tierEl.setAttribute('aria-label', `${pkg.name} catering package`);
+    
+    // Add scroll animation class with delay
+    tierEl.classList.add('reveal-on-scroll');
+    tierEl.setAttribute('data-animation-delay', `${(index + 1) * 0.1}`);
 
     pkg.features.forEach((feature) => {
       const li = document.createElement('li');
@@ -424,18 +475,30 @@ function renderGallery() {
   const container = selectElement('.gallery-grid');
   const template = selectElement('#template-gallery-item');
 
-  GALLERY_ITEMS.forEach((item) => {
+  GALLERY_ITEMS.forEach((item, index) => {
     const clone = template.content.cloneNode(true);
+    const itemEl = clone.querySelector('.gallery-grid__item');
     const image = clone.querySelector('.gallery-grid__image');
     const caption = clone.querySelector('.gallery-grid__caption');
 
-    image.src = item.src;
+    // Lazy loading setup
+    image.loading = 'lazy';
+    image.dataset.src = item.src;
+    image.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23ddd" width="400" height="300"/%3E%3C/svg%3E'; // Placeholder
     image.alt = item.alt;
     image.dataset.aiPrompt = item.prompt;
+    image.classList.add('lazy-image');
     caption.textContent = item.caption;
+    
+    // Add scroll animation class with staggered delay
+    itemEl.classList.add('reveal-on-scroll');
+    itemEl.setAttribute('data-animation-delay', `${(index % 6) * 0.1}`);
 
     container.appendChild(clone);
   });
+  
+  // Initialize lazy loading observer
+  initLazyLoading();
 }
 
 /* Testimonials Carousel */
@@ -477,38 +540,158 @@ function initTestimonialsCarousel() {
   });
 
   let currentIndex = 0;
+  let autoPlayInterval = null;
+  let isPaused = false;
   const slides = selectAllElements('.testimonial');
   const dots = selectAllElements('.testimonials-carousel__dot');
+  const carousel = track.closest('.testimonials-carousel');
+  const progressBar = carousel?.querySelector('.testimonials-carousel__progress');
 
-  function updateCarousel(index) {
+  function updateCarousel(index, smooth = true) {
     if (slides.length === 0) return;
 
     const clampedIndex = Math.max(0, Math.min(index, slides.length - 1));
     currentIndex = clampedIndex;
     const offset = -clampedIndex * 100;
+    
+    if (smooth) {
+      track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    } else {
+      track.style.transition = 'none';
+    }
+    
     track.style.transform = `translateX(${offset}%)`;
 
     dots.forEach((dot, i) => {
       dot.classList.toggle('testimonials-carousel__dot--active', i === clampedIndex);
+      dot.setAttribute('aria-selected', i === clampedIndex ? 'true' : 'false');
     });
+
+    // Update progress bar
+    if (progressBar) {
+      const progress = ((clampedIndex + 1) / slides.length) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    // Update ARIA live region
+    const currentSlide = slides[clampedIndex];
+    if (currentSlide) {
+      const name = currentSlide.querySelector('.testimonial__name')?.textContent || '';
+      const event = currentSlide.querySelector('.testimonial__event')?.textContent || '';
+      carousel?.setAttribute('aria-label', `Testimonial ${clampedIndex + 1} of ${slides.length}: ${name} - ${event}`);
+    }
   }
+
+  function startAutoPlay() {
+    if (autoPlayInterval) return;
+    
+    autoPlayInterval = setInterval(() => {
+      if (!isPaused) {
+        const nextIndex = (currentIndex + 1) % slides.length;
+        updateCarousel(nextIndex);
+      }
+    }, 5000); // Change slide every 5 seconds
+  }
+
+  function stopAutoPlay() {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = null;
+    }
+  }
+
+  function pauseAutoPlay() {
+    isPaused = true;
+  }
+
+  function resumeAutoPlay() {
+    isPaused = false;
+  }
+
+  // Auto-play functionality
+  startAutoPlay();
+
+  // Pause on hover
+  carousel?.addEventListener('mouseenter', pauseAutoPlay);
+  carousel?.addEventListener('mouseleave', resumeAutoPlay);
+  carousel?.addEventListener('focusin', pauseAutoPlay);
+  carousel?.addEventListener('focusout', resumeAutoPlay);
+
+  // Touch gestures for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    pauseAutoPlay();
+  }, { passive: true });
+
+  track.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+    setTimeout(resumeAutoPlay, 3000);
+  }, { passive: true });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        updateCarousel(currentIndex + 1);
+      } else {
+        updateCarousel(currentIndex - 1);
+      }
+    }
+  }
+
+  // Keyboard navigation
+  carousel?.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      updateCarousel(currentIndex - 1);
+      pauseAutoPlay();
+      setTimeout(resumeAutoPlay, 5000);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      updateCarousel(currentIndex + 1);
+      pauseAutoPlay();
+      setTimeout(resumeAutoPlay, 5000);
+    }
+  });
 
   prevButton.addEventListener('click', () => {
     updateCarousel(currentIndex - 1);
+    pauseAutoPlay();
+    setTimeout(resumeAutoPlay, 5000);
   });
 
   nextButton.addEventListener('click', () => {
     updateCarousel(currentIndex + 1);
+    pauseAutoPlay();
+    setTimeout(resumeAutoPlay, 5000);
   });
 
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
       const index = Number(dot.dataset.index || 0);
       updateCarousel(index);
+      pauseAutoPlay();
+      setTimeout(resumeAutoPlay, 5000);
     });
   });
 
-  updateCarousel(0);
+  // Make carousel focusable for keyboard navigation
+  carousel?.setAttribute('tabindex', '0');
+  carousel?.setAttribute('role', 'region');
+  carousel?.setAttribute('aria-label', 'Testimonials carousel');
+
+  updateCarousel(0, false);
+  
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', () => {
+    stopAutoPlay();
+  });
 }
 
 /* FAQ Accordion */
@@ -543,10 +726,11 @@ function initFaqAccordion() {
 function initContactForm() {
   const form = document.querySelector('#contact-form');
   const successMessage = document.querySelector('#contact-success');
+  const submitButton = form?.querySelector('.contact-form__submit');
 
   if (!form || !successMessage) return;
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     successMessage.textContent = '';
     clearFormErrors(form);
@@ -558,12 +742,83 @@ function initContactForm() {
 
     if (Object.keys(errors).length > 0) {
       displayFormErrors(form, errors);
+      // Add shake animation to inputs with errors
+      Object.keys(errors).forEach((field) => {
+        const input = form.querySelector(`[name="${field}"]`);
+        if (input) {
+          input.classList.add('error');
+          setTimeout(() => input.classList.remove('error'), 500);
+        }
+      });
       return;
     }
 
-    successMessage.textContent =
-      'Thank you for reaching out. Our team will follow up within one business day.';
-    form.reset();
+    // Show loading state
+    if (submitButton) {
+      submitButton.classList.add('is-loading');
+      submitButton.disabled = true;
+    }
+
+    try {
+      // Check if Formspree ID is set (not placeholder)
+      const formAction = form.getAttribute('action');
+      if (formAction && formAction.includes('YOUR_FORM_ID')) {
+        // Formspree ID not set yet, show success message anyway for demo
+        setTimeout(() => {
+          if (submitButton) {
+            submitButton.classList.remove('is-loading');
+            submitButton.classList.add('is-success');
+            submitButton.disabled = false;
+          }
+          successMessage.textContent =
+            'Thank you for reaching out. Our team will follow up within one business day.';
+          form.reset();
+          // Reset button state after 3 seconds
+          setTimeout(() => {
+            if (submitButton) {
+              submitButton.classList.remove('is-success');
+            }
+          }, 3000);
+        }, 1000);
+      } else {
+        // Formspree ID is set, submit to Formspree
+        const response = await fetch(formAction, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          if (submitButton) {
+            submitButton.classList.remove('is-loading');
+            submitButton.classList.add('is-success');
+            submitButton.disabled = false;
+          }
+          successMessage.textContent =
+            'Thank you for reaching out. Our team will follow up within one business day.';
+          form.reset();
+          // Reset button state after 3 seconds
+          setTimeout(() => {
+            if (submitButton) {
+              submitButton.classList.remove('is-success');
+            }
+          }, 3000);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      if (submitButton) {
+        submitButton.classList.remove('is-loading');
+        submitButton.disabled = false;
+      }
+      successMessage.textContent =
+        'There was an error submitting your inquiry. Please try again or contact us directly.';
+      successMessage.style.color = 'hsl(0, 70%, 55%)';
+    }
   });
 }
 
@@ -892,6 +1147,45 @@ function initHeroParallax() {
   updateParallax(); // Initial call
 }
 
+/* Image Lazy Loading */
+
+function initLazyLoading() {
+  const lazyImages = document.querySelectorAll('.lazy-image');
+  if (lazyImages.length === 0) return;
+
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        const src = img.dataset.src;
+        
+        if (src) {
+          // Create a new image to preload
+          const imageLoader = new Image();
+          imageLoader.onload = () => {
+            img.src = src;
+            img.classList.add('lazy-image--loaded');
+            img.classList.remove('lazy-image--loading');
+          };
+          imageLoader.onerror = () => {
+            img.classList.add('lazy-image--error');
+            img.classList.remove('lazy-image--loading');
+          };
+          img.classList.add('lazy-image--loading');
+          imageLoader.src = src;
+        }
+        
+        observer.unobserve(img);
+      }
+    });
+  }, {
+    rootMargin: '50px', // Start loading 50px before image enters viewport
+    threshold: 0.01
+  });
+
+  lazyImages.forEach((img) => imageObserver.observe(img));
+}
+
 /* Scroll Animations */
 
 function initScrollAnimations() {
@@ -902,15 +1196,19 @@ function initScrollAnimations() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-          // Optional: stop observing after animation (animations happen once)
+          // Add a small delay based on element position for staggered effect
+          const delay = parseFloat(entry.target.dataset.animationDelay || 0);
+          setTimeout(() => {
+            entry.target.classList.add('reveal-visible');
+          }, delay * 1000);
+          // Stop observing after animation
           observer.unobserve(entry.target);
         }
       });
     },
     {
-      threshold: 0.1, // Trigger when 10% of element is visible
-      rootMargin: '0px 0px -50px 0px' // Trigger slightly before element enters viewport
+      threshold: 0.15, // Trigger when 15% of element is visible
+      rootMargin: '0px 0px -80px 0px' // Trigger earlier for smoother reveal
     }
   );
 
@@ -990,11 +1288,35 @@ function initBackToTop() {
     }
   };
 
-  window.addEventListener('scroll', toggleVisibility);
+  window.addEventListener('scroll', toggleVisibility, { passive: true });
   toggleVisibility();
 
   button.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Enhanced smooth scroll to top with easing
+    const startPosition = window.scrollY;
+    const duration = Math.min(1000, startPosition * 0.5);
+    let startTime = null;
+
+    function easeInOutCubic(t) {
+      return t < 0.5 
+        ? 4 * t * t * t 
+        : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function animateScroll(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const ease = easeInOutCubic(progress);
+      
+      window.scrollTo(0, startPosition * (1 - ease));
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    }
+
+    requestAnimationFrame(animateScroll);
   });
 }
 

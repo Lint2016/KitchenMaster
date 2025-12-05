@@ -18,6 +18,11 @@
   <meta property="og:url" content="https://www.example.com/" />
   <meta property="og:image" content="https://www.example.com/og-image.jpg" />
 
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -76,18 +81,12 @@
       <!-- Hero Section -->
       <section class="hero" aria-labelledby="hero-heading">
         <div class="hero__media">
-          <video 
-      class="hero__video" 
-      autoplay 
-      muted 
-      loop 
-      playsinline 
-      preload="auto">
-      <source src="assets/13197422_1920_1080_25fps.mp4" type="video/mp4">
-      <!-- fallback -->
-      Your browser does not support HTML5 video.
-    </video>
-          
+          <video class="hero__video" autoplay muted loop playsinline preload="auto">
+            <source src="assets/hero-video-optimized.mp4" type="video/mp4">
+            <!-- fallback -->
+            Your browser does not support HTML5 video.
+          </video>
+
         </div>
         <div class="container-custom hero__content-wrapper">
           <div class="hero__content">
@@ -111,18 +110,18 @@
       </section>
 
       <!-- About Section -->
-      <section id="about" class="section section-about section-padding" aria-labelledby="about-heading">
+      <section id="about" class="section section-about section-padding reveal-on-scroll" aria-labelledby="about-heading">
         <div class="container-custom section-about__grid">
-          <div class="section-about__media">
+          <div class="section-about__media reveal-on-scroll" data-animation-delay="0.1">
             <video class="section-about__video shadow-elegant" autoplay muted loop playsinline
               poster="assets/aboutP.jpg">
-              <source src="assets/chef-video.mp4" type="video/mp4">
+              <source src="assets/chef-video-optimized.mp4" type="video/mp4">
               <!-- Fallback image for browsers that don't support video -->
               <img src="assets/aboutP.jpg" alt="Chef team plating artistic gourmet dishes in an open kitchen"
                 class="section-about__image shadow-elegant" />
             </video>
           </div>
-          <div class="section-about__content">
+          <div class="section-about__content reveal-on-scroll" data-animation-delay="0.2">
             <h2 id="about-heading" class="section-about__title u-gradient-text">
               Crafting Culinary Memories
             </h2>
@@ -167,10 +166,13 @@
         </div>
       </section>
 
+      <!-- Section Divider -->
+      <div class="section-divider section-divider--gradient"></div>
+
       <!-- Services Section -->
-      <section id="services" class="section section-services section-padding" aria-labelledby="services-heading">
+      <section id="services" class="section section-services section-padding reveal-on-scroll" aria-labelledby="services-heading">
         <div class="container-custom">
-          <header class="section__header">
+          <header class="section__header reveal-on-scroll">
             <h2 id="services-heading" class="section__title">Services Tailored to Every Occasion</h2>
             <p class="section__subtitle">
               From first toast to final course, we orchestrate every detail of your culinary experience.
@@ -179,7 +181,7 @@
 
           <div class="section-services__grid" aria-label="Key catering services">
             <!-- Service Card 1 -->
-            <article class="services-card shadow-soft u-hover-lift">
+            <article class="services-card shadow-soft u-hover-lift reveal-on-scroll" data-animation-delay="0.1">
               <div class="services-card__icon" aria-hidden="true">
                 <!-- ChefHat icon (simple SVG) -->
                 <svg viewBox="0 0 24 24" class="icon icon--chef-hat" aria-hidden="true" focusable="false">
@@ -196,7 +198,7 @@
             </article>
 
             <!-- Service Card 2 -->
-            <article class="services-card shadow-soft u-hover-lift">
+            <article class="services-card shadow-soft u-hover-lift reveal-on-scroll" data-animation-delay="0.2">
               <div class="services-card__icon" aria-hidden="true">
                 <!-- Users icon -->
                 <svg viewBox="0 0 24 24" class="icon icon--users" aria-hidden="true" focusable="false">
@@ -213,7 +215,7 @@
             </article>
 
             <!-- Service Card 3 -->
-            <article class="services-card shadow-soft u-hover-lift">
+            <article class="services-card shadow-soft u-hover-lift reveal-on-scroll" data-animation-delay="0.3">
               <div class="services-card__icon" aria-hidden="true">
                 <!-- Sparkles icon -->
                 <svg viewBox="0 0 24 24" class="icon icon--sparkles" aria-hidden="true" focusable="false">
@@ -229,7 +231,7 @@
             </article>
 
             <!-- Service Card 4 -->
-            <article class="services-card shadow-soft u-hover-lift">
+            <article class="services-card shadow-soft u-hover-lift reveal-on-scroll" data-animation-delay="0.4">
               <div class="services-card__icon" aria-hidden="true">
                 <!-- Award icon -->
                 <svg viewBox="0 0 24 24" class="icon icon--award" aria-hidden="true" focusable="false">
@@ -248,10 +250,13 @@
         </div>
       </section>
 
+      <!-- Section Divider -->
+      <div class="section-divider section-divider--wave"></div>
+
       <!-- Menu Packages Section -->
-      <section id="menu" class="section section-menu section-padding" aria-labelledby="menu-heading">
+      <section id="menu" class="section section-menu section-padding reveal-on-scroll" aria-labelledby="menu-heading">
         <div class="container-custom">
-          <header class="section__header">
+          <header class="section__header reveal-on-scroll">
             <h2 id="menu-heading" class="section__title">Curated Menu Packages</h2>
             <p class="section__subtitle">
               Three tiers to match your vision and guest list—each fully customizable with our culinary team.
@@ -264,10 +269,13 @@
         </div>
       </section>
 
+      <!-- Section Divider -->
+      <div class="section-divider section-divider--gradient"></div>
+
       <!-- Gallery Section -->
-      <section id="gallery" class="section section-gallery section-padding" aria-labelledby="gallery-heading">
+      <section id="gallery" class="section section-gallery section-padding reveal-on-scroll" aria-labelledby="gallery-heading">
         <div class="container-custom">
-          <header class="section__header">
+          <header class="section__header reveal-on-scroll">
             <h2 id="gallery-heading" class="section__title">Gallery of Gourmet Moments</h2>
             <p class="section__subtitle">
               A taste of the experiences we've created—from candlelit dinners to grand ballroom celebrations.
@@ -280,11 +288,14 @@
         </div>
       </section>
 
+      <!-- Section Divider -->
+      <div class="section-divider section-divider--wave"></div>
+
       <!-- Testimonials Section -->
-      <section id="testimonials" class="section section-testimonials section-padding"
+      <section id="testimonials" class="section section-testimonials section-padding reveal-on-scroll"
         aria-labelledby="testimonials-heading">
         <div class="container-custom">
-          <header class="section__header section__header--center">
+          <header class="section__header section__header--center reveal-on-scroll">
             <h2 id="testimonials-heading" class="section__title">Loved by Our Clients</h2>
             <p class="section__subtitle">
               Hear from hosts who trusted us with their most meaningful moments.
@@ -294,6 +305,9 @@
           <div class="testimonials-carousel" aria-roledescription="carousel">
             <div class="testimonials-carousel__track" role="list">
               <!-- Slides injected via JS -->
+            </div>
+            <div class="testimonials-carousel__progress-container">
+              <div class="testimonials-carousel__progress" aria-hidden="true"></div>
             </div>
             <div class="testimonials-carousel__controls">
               <button class="button button--ghost testimonials-carousel__control testimonials-carousel__control--prev"
@@ -312,10 +326,13 @@
         </div>
       </section>
 
+      <!-- Section Divider -->
+      <div class="section-divider section-divider--gradient"></div>
+
       <!-- FAQ Section -->
-      <section id="faq" class="section section-faq section-padding" aria-labelledby="faq-heading">
+      <section id="faq" class="section section-faq section-padding reveal-on-scroll" aria-labelledby="faq-heading">
         <div class="container-custom">
-          <header class="section__header section__header--center">
+          <header class="section__header section__header--center reveal-on-scroll">
             <h2 id="faq-heading" class="section__title">Frequently Asked Questions</h2>
             <p class="section__subtitle">
               Details to help you plan with confidence. Still curious? We're a message away.
@@ -329,60 +346,84 @@
       </section>
 
     </div>
-    <form class="contact-form"  id="contact">
-    <div class="contact-form__field">
-      <label for="email" class="contact-form__label">Email</label>
-      <input type="email" id="email" name="email" class="contact-form__input" required autocomplete="email" />
-      <p class="contact-form__error" data-error-for="email"></p>
-    </div>
 
-    <div class="contact-form__field">
-      <label for="phone" class="contact-form__label">Phone</label>
-      <input type="tel" id="phone" name="phone" class="contact-form__input" autocomplete="tel" />
-      <p class="contact-form__error" data-error-for="phone"></p>
-    </div>
+    <!-- Contact Section -->
+    <section id="contact" class="section section-contact section-padding reveal-on-scroll" aria-labelledby="contact-heading">
+      <div class="container-custom">
+        <header class="section__header section__header--center reveal-on-scroll">
+          <h2 id="contact-heading" class="section__title">Get In Touch</h2>
+          <p class="section__subtitle">
+            Ready to plan your perfect event? Let's discuss your vision.
+          </p>
+        </header>
 
-    <div class="contact-form__field contact-form__field--inline">
-      <div class="contact-form__field">
-        <label for="event-date" class="contact-form__label">Event Date</label>
-        <input type="date" id="event-date" name="eventDate" class="contact-form__input" />
-        <p class="contact-form__error" data-error-for="eventDate"></p>
+        <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="contact-form__field">
+            <input type="text" id="name" name="name" class="contact-form__input" placeholder=" " required autocomplete="name" />
+            <label for="name" class="contact-form__label">Name</label>
+            <p class="contact-form__error" data-error-for="name"></p>
+          </div>
+
+          <div class="contact-form__field">
+            <input type="email" id="email" name="email" class="contact-form__input" placeholder=" " required autocomplete="email" />
+            <label for="email" class="contact-form__label">Email</label>
+            <p class="contact-form__error" data-error-for="email"></p>
+          </div>
+
+          <div class="contact-form__field">
+            <input type="tel" id="phone" name="phone" class="contact-form__input" placeholder=" " autocomplete="tel" />
+            <label for="phone" class="contact-form__label">Phone</label>
+            <p class="contact-form__error" data-error-for="phone"></p>
+          </div>
+
+          <div class="contact-form__field contact-form__field--inline">
+            <div class="contact-form__field">
+              <input type="date" id="event-date" name="eventDate" class="contact-form__input" placeholder=" " />
+              <label for="event-date" class="contact-form__label">Event Date</label>
+              <p class="contact-form__error" data-error-for="eventDate"></p>
+            </div>
+            <div class="contact-form__field">
+              <input type="number" id="guest-count" name="guestCount" class="contact-form__input" min="1" step="1" placeholder=" " />
+              <label for="guest-count" class="contact-form__label">Guest Count</label>
+              <p class="contact-form__error" data-error-for="guestCount"></p>
+            </div>
+          </div>
+
+          <div class="contact-form__field">
+            <textarea id="message" name="message" class="contact-form__input contact-form__input--textarea" rows="5" placeholder=" " required></textarea>
+            <label for="message" class="contact-form__label">Event Details</label>
+            <p class="contact-form__error" data-error-for="message"></p>
+          </div>
+
+          <button type="submit" class="button button--primary contact-form__submit">
+            <span class="button__text">Submit Inquiry</span>
+            <span class="button__loader" aria-hidden="true">
+              <svg class="spinner" viewBox="0 0 24 24">
+                <circle class="spinner__circle" cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="32" stroke-dashoffset="32">
+                  <animate attributeName="stroke-dasharray" dur="2s" values="0 32;16 16;0 32;0 32" repeatCount="indefinite"/>
+                  <animate attributeName="stroke-dashoffset" dur="2s" values="0;-16;-32;-32" repeatCount="indefinite"/>
+                </circle>
+              </svg>
+            </span>
+            <span class="button__success" aria-hidden="true">✓</span>
+          </button>
+          <p class="contact-form__success" id="contact-success" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="section-contact__map" aria-label="Location map">
+          <div class="map-embed shadow-soft">
+            <!-- Google Maps embed for 271 Columbine Ave, Mondeor, Johannesburg South -->
+            <iframe title="Elevate Catering Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.5353754287253!2d28.007669475417625!3d-26.276738877031917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9508b12f5acb5b%3A0x9141162c9c9c4c71!2s271%20Columbine%20Ave%2C%20Mondeor%2C%20Johannesburg%20South%2C%202091!5e0!3m2!1sen!2sza!4v1763123730006!5m2!1sen!2sza"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border:0;" allowfullscreen="yes"></iframe>
+          </div>
+
+          <div class="section-contact__details">
+            <p class="section-contact__detail"><strong>Address:</strong> 271 columbine Avenue</p>
+            <p class="section-contact__detail"><strong>WhatsApp:</strong> 123456</p>
+          </div>
+        </aside>
       </div>
-      <div class="contact-form__field">
-        <label for="guest-count" class="contact-form__label">Guest Count</label>
-        <input type="number" id="guest-count" name="guestCount" class="contact-form__input" min="1" step="1" />
-        <p class="contact-form__error" data-error-for="guestCount"></p>
-      </div>
-    </div>
-
-    <div class="contact-form__field">
-      <label for="message" class="contact-form__label">Event Details</label>
-      <textarea id="message" name="message" class="contact-form__input contact-form__input--textarea" rows="5"
-        required></textarea>
-      <p class="contact-form__error" data-error-for="message"></p>
-    </div>
-
-    <button type="submit" class="button button--primary contact-form__submit">
-      Submit Inquiry
-    </button>
-    <p class="contact-form__success" id="contact-success" role="status" aria-live="polite"></p>
-    </form>
-    </div>
-
-    <aside class="section-contact__map" aria-label="Location map">
-      <div class="map-embed shadow-soft">
-        <!-- Google Maps embed for 271 Columbine Ave, Mondeor, Johannesburg South -->
-        <iframe title="Elevate Catering Location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.5353754287253!2d28.007669475417625!3d-26.276738877031917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9508b12f5acb5b%3A0x9141162c9c9c4c71!2s271%20Columbine%20Ave%2C%20Mondeor%2C%20Johannesburg%20South%2C%202091!5e0!3m2!1sen!2sza!4v1763123730006!5m2!1sen!2sza"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border:0;" allowfullscreen="yes"></iframe>
-      </div>
-
-      <div class="section-contact__details">
-        <p class="section-contact__detail"><strong>Address:</strong> 271 columbine Avenue</p>
-        <p class="section-contact__detail"><strong>Wahstapp:</strong> 123456</p>
-      </div>
-    </aside>
-    </div>
     </section>
     </div>
 
@@ -556,6 +597,15 @@
   <button class="back-to-top" type="button" aria-label="Back to top">
     ↑ Back to top
   </button>
+
+  <!-- Gallery Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+    <div class="lightbox__content">
+      <button class="lightbox__close" type="button" aria-label="Close lightbox">×</button>
+      <img class="lightbox__image" src="" alt="" />
+      <p class="lightbox__caption" id="lightbox-caption"></p>
+    </div>
+  </div>
 
   <script type="module" src="index.js"></script>
 </body>
